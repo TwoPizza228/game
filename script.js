@@ -71,9 +71,6 @@ function monsterAI() {
        requestAnimationFrame(monsterAI);
     }
 }
-function checkCollision() {
-    if (!isPlaying) return;
-}
 function gameOver() {
     isPlaying = false;
     alert('АХАХХАХАХАХАХАХАХ ТЫ ПРОИГРАЛ');
@@ -84,7 +81,6 @@ function gameOver() {
 function gameLoop() {
     if (!isPlaying) return;
     movePlayer();
-    checkCollision();
     currentScore += 5;
     difficultyScore += 5;
     scoreCounter.textContent = `Счёт: ${currentScore}`;
@@ -92,5 +88,12 @@ function gameLoop() {
     if (difficultyScore > 1000){
       difficultyScore -= 1000;
       monsterSpeed += 1;
+    }
+    if (currentScore > 5000){
+      alert('Ты смог сбежать........ Я устала');
+      isPlaying = false;
+    gameContainer.style.display = 'none';
+    startBtn.parentNode.style.display = 'block';
+    location.reload();
     }
 }
